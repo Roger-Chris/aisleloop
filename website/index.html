@@ -48,13 +48,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
 @media (min-width: 760px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
-h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; margin: 0; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.08; margin: 0; text-wrap: balance; }
 p { margin: 0; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--gaze); outline-offset: 3px; border-radius: 8px; }
-.coord { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+.coord { font-family: var(--mono); font-size: 12.5px; color: var(--gold); }
 .lede { color: var(--muted); font-size: clamp(16.5px, 1.5vw, 19px); max-width: 56ch; }
-.grad { background: linear-gradient(100deg, var(--text) 10%, var(--gaze) 90%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.grad { color: var(--gaze); }
 
 .glass {
   background: var(--glass); border: 1px solid var(--border); border-radius: 24px;
@@ -85,11 +85,11 @@ a { color: inherit; }
   font: 700 14px/1 var(--display); padding: 14px 22px; border-radius: 999px;
   background: var(--text); color: var(--void); border: 1px solid var(--text);
   text-decoration: none; cursor: pointer;
-  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  transition: background-color .15s ease-out, border-color .15s ease-out;
 }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,255,255,.18); }
+.btn:hover { background: #FFFFFF; }
 .btn.ghost { background: transparent; color: var(--text); border-color: var(--specular); }
-.btn.ghost:hover { box-shadow: 0 0 0 1px var(--gaze), 0 0 30px var(--gaze-soft); }
+.btn.ghost:hover { background: transparent; border-color: var(--gaze); }
 .btn.small { padding: 11px 16px; font-size: 13px; }
 .btn .arrow { transition: transform .25s var(--ease); }
 .btn:hover .arrow { transform: translateX(4px); }
@@ -105,30 +105,26 @@ a { color: inherit; }
 .hero-copy { display: grid; gap: 26px; min-width: 0; align-content: start; }
 .hero h1 { font-size: clamp(46px, 7.4vw, 104px); }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-.funnel-card { padding: 22px; display: grid; gap: 16px; min-width: 0; align-self: end; }
+.funnel-card { padding: 24px; display: grid; gap: 16px; min-width: 0; align-self: end; }
 .funnel-card header { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
-.live { display: inline-flex; gap: 8px; align-items: center; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
-.live i { width: 7px; height: 7px; border-radius: 50%; background: #FF5A5F; box-shadow: 0 0 10px #FF5A5F; animation: blink 1.4s infinite; }
-@keyframes blink { 50% { opacity: .25; } }
+.live { display: inline-flex; gap: 8px; align-items: center; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.live i { width: 7px; height: 7px; border-radius: 50%; background: var(--dim); }
 .funnel { display: grid; gap: 10px; }
 .frow { display: grid; grid-template-columns: 78px 1fr 52px; gap: 12px; align-items: center; }
-.frow span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.frow span { font-family: var(--mono); font-size: 12px; color: var(--muted); }
 .frow .track { height: 6px; border-radius: 3px; background: rgba(255,255,255,.06); overflow: hidden; }
-.frow .track i { display: block; height: 100%; border-radius: 3px; background: var(--dim); transition: width .6s var(--ease); }
-.frow.att .track i { background: var(--gaze); box-shadow: 0 0 12px var(--gaze); }
+.frow .track i { display: block; height: 100%; border-radius: 3px; background: var(--dim); transition: width .15s ease-out; }
+.frow.att .track i { background: var(--gaze); }
 .frow.sold .track i { background: var(--gold); }
 .frow b { font-family: var(--display); font-size: 18px; text-align: right; font-variant-numeric: tabular-nums; }
 .funnel-card small { color: var(--dim); font-size: 12px; line-height: 1.5; }
 
 /* Ticker */
-.ticker { border-block: 1px solid var(--border); overflow: hidden; padding-block: 14px; background: var(--void-2); }
-.ticker-track { display: flex; gap: 40px; width: max-content; animation: slide 46s linear infinite; }
-.ticker:hover .ticker-track { animation-play-state: paused; }
-@keyframes slide { to { transform: translateX(-50%); } }
-.tk { font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; color: var(--muted); white-space: nowrap; display: inline-flex; gap: 12px; align-items: center; }
+.ticker { border-block: 1px solid var(--border); padding-block: 14px; background: var(--void-2); }
+.ticker-track { display: flex; flex-wrap: wrap; gap: 8px 32px; }
+.tk { font-family: var(--mono); font-size: 12.5px; color: var(--muted); white-space: nowrap; display: inline-flex; gap: 8px; align-items: center; }
 .tk b { color: var(--gold); font-weight: 500; }
 .tk em { font-style: normal; color: var(--gaze); }
-.tk::before { content: "✦"; color: var(--gold); font-size: 10px; }
 
 /* Sections */
 .sec { padding-block: clamp(80px, 11vw, 150px) 0; }
@@ -138,20 +134,19 @@ a { color: inherit; }
 
 .compare { display: grid; gap: 20px; }
 @media (min-width: 880px) { .compare { grid-template-columns: 1fr 1fr; } }
-.cmp { padding: 28px; display: grid; gap: 14px; min-width: 0; }
+.cmp { padding: 24px; display: grid; gap: 14px; min-width: 0; }
 .cmp h3 { font-size: 24px; }
 .cmp ul { list-style: none; margin: 0; padding: 0; }
 .cmp li { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--border); }
 .cmp li:last-child { border-bottom: 0; }
 .cmp li span:last-child { font-family: var(--mono); font-size: 12.5px; color: var(--dim); text-align: right; }
-.cmp.us { border-color: rgba(110,168,255,.35); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 0 60px -20px var(--gaze-soft); }
+.cmp.us { border-color: rgba(110,168,255,.35); }
 .cmp.us li span:last-child { color: var(--gaze); }
 
 .steps { display: grid; gap: 16px; }
 @media (min-width: 760px) { .steps { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1120px) { .steps { grid-template-columns: repeat(4, 1fr); } }
-.step { padding: 26px; display: grid; gap: 12px; align-content: start; min-width: 0; transition: border-color .3s var(--ease), transform .3s var(--ease); }
-.step:hover { border-color: var(--specular); transform: translateY(-4px); }
+.step { padding: 24px; display: grid; gap: 12px; align-content: start; min-width: 0; }
 .step .coord { color: var(--gaze); }
 .step h3 { font-size: 22px; letter-spacing: -0.02em; }
 .step p { color: var(--muted); font-size: 15px; }
@@ -161,7 +156,7 @@ a { color: inherit; }
 @media (min-width: 1000px) { .lab { grid-template-columns: 1.4fr 1fr; align-items: start; } }
 .table { overflow-x: auto; min-width: 0; padding: 6px 0; }
 .trow { display: grid; grid-template-columns: minmax(118px, 1.1fr) 2fr 74px; gap: 16px; align-items: center; padding: 14px 22px; min-width: 440px; border-bottom: 1px solid var(--border); }
-.thead { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+.thead { font-family: var(--mono); font-size: 12px; color: var(--dim); }
 .trow.pick { cursor: pointer; transition: background .2s; }
 .trow.pick:hover { background: rgba(255,255,255,.03); }
 .trow.pick[aria-pressed="true"] { background: var(--gaze-soft); }
@@ -176,7 +171,7 @@ a { color: inherit; }
 .legend span::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 7px; }
 .legend .l1::before { background: var(--gaze); }
 .legend .l2::before { background: var(--gold); }
-.insight { padding: 28px; display: grid; gap: 16px; min-width: 0; }
+.insight { padding: 24px; display: grid; gap: 16px; min-width: 0; }
 .insight h3 { font-size: clamp(26px, 2.8vw, 34px); }
 .insight p { color: var(--muted); }
 .insight .act { color: var(--text); padding: 14px 16px; border-radius: 14px; background: var(--gold-soft); border: 1px solid rgba(217,180,74,.28); font-size: 15px; }
@@ -190,8 +185,8 @@ a { color: inherit; }
 .aud-card p { color: var(--muted); }
 .aud-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
 .aud-card li { display: flex; gap: 12px; color: var(--text); font-size: 15.5px; }
-.aud-card li::before { content: "✦"; color: var(--gold); font-size: 11px; margin-top: 4px; }
-.aud-card.brands { border-color: rgba(110,168,255,.35); background: linear-gradient(160deg, rgba(110,168,255,.12), rgba(255,255,255,.03) 60%); }
+.aud-card li::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 1px; background: var(--gold); margin-top: 10px; }
+.aud-card.brands { border-color: rgba(110,168,255,.35); }
 
 /* Privacy */
 .privacy { display: grid; gap: 40px; }
@@ -204,14 +199,13 @@ a { color: inherit; }
 .promise p { color: var(--muted); font-size: 15px; }
 
 /* Pilot */
-.pilot { padding: clamp(24px, 5vw, 60px); display: grid; gap: 40px; position: relative; overflow: hidden; }
-.pilot::before { content: ""; position: absolute; width: 520px; height: 520px; right: -160px; top: -200px; border-radius: 50%; background: radial-gradient(circle, rgba(110,168,255,.22), transparent 65%); pointer-events: none; }
+.pilot { padding: clamp(24px, 5vw, 56px); display: grid; gap: 40px; position: relative; overflow: hidden; }
 @media (min-width: 1000px) { .pilot { grid-template-columns: 1fr 1fr; } }
 .pilot-copy { display: grid; gap: 22px; align-content: start; min-width: 0; position: relative; }
 .pilot-copy h2 { font-size: clamp(34px, 4.4vw, 58px); }
 .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
 .specs div { background: var(--void-2); padding: 18px 20px; min-width: 0; }
-.specs span { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.specs span { display: block; font-family: var(--mono); font-size: 12px; color: var(--gold); margin-bottom: 4px; }
 .specs b { font-family: var(--display); font-size: clamp(22px, 2.8vw, 30px); letter-spacing: -0.02em; }
 form { display: grid; gap: 14px; min-width: 0; position: relative; }
 .field { display: grid; gap: 6px; min-width: 0; }
@@ -226,25 +220,25 @@ form .btn { justify-self: start; }
 
 footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow: hidden; }
 .foot { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: end; }
-.giant { font-family: var(--display); font-weight: 800; font-size: clamp(60px, 15vw, 200px); letter-spacing: -0.06em; line-height: .82; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.22); }
-.giant span { -webkit-text-stroke: 0; color: var(--text); }
+.giant { font-family: var(--display); font-weight: 700; font-size: clamp(60px, 15vw, 200px); letter-spacing: -0.04em; line-height: .9; color: var(--dim); }
+.giant span { color: var(--text); }
 .foot small { color: var(--dim); font-size: 12.5px; display: block; }
 
 /* Investor sections */
 .why { display: grid; gap: 16px; }
 @media (min-width: 760px) { .why { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1120px) { .why { grid-template-columns: repeat(3, 1fr); } }
-.why-card { padding: 26px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.why-card { padding: 24px; display: grid; gap: 10px; align-content: start; min-width: 0; }
 .why-card h3 { font-size: 21px; letter-spacing: -0.02em; }
 .why-card p { color: var(--muted); font-size: 15px; }
-.why-card .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--gaze); }
+.why-card .tag { font-family: var(--mono); font-size: 12px; color: var(--gaze); }
 
 .market { display: grid; gap: 16px; }
 @media (min-width: 880px) { .market { grid-template-columns: repeat(3, 1fr); } }
-.stat { padding: 26px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.stat { padding: 24px; display: grid; gap: 8px; align-content: start; min-width: 0; }
 .stat b { font-family: var(--display); font-size: clamp(34px, 4vw, 52px); letter-spacing: -0.04em; line-height: 1; }
 .stat p { color: var(--muted); font-size: 14.5px; }
-.src { font-family: var(--mono); font-size: 11px; color: var(--dim); }
+.src { font-family: var(--mono); font-size: 12px; color: var(--dim); }
 .src a { color: var(--dim); }
 .src a:hover { color: var(--gaze); }
 
@@ -254,7 +248,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
 .stream { padding: 24px; display: grid; gap: 8px; min-width: 0; }
 .stream h3 { font-size: 20px; letter-spacing: -0.02em; }
 .stream p { color: var(--muted); font-size: 15px; }
-.calc { padding: 26px; display: grid; gap: 20px; min-width: 0; }
+.calc { padding: 24px; display: grid; gap: 20px; min-width: 0; }
 .calc-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
 .calc-head h3 { font-size: 22px; letter-spacing: -0.02em; }
 .inputs { display: grid; gap: 14px; }
@@ -266,13 +260,13 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
 .results { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
 @media (min-width: 560px) { .results { grid-template-columns: repeat(4, 1fr); } }
 .results div { background: var(--void-2); padding: 16px; min-width: 0; }
-.results span { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.results span { display: block; font-family: var(--mono); font-size: 12px; color: var(--gold); margin-bottom: 4px; }
 .results b { font-family: var(--display); font-size: clamp(18px, 2vw, 24px); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
 
 .comp-wrap { overflow-x: auto; min-width: 0; }
 .comp { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 14.5px; }
 .comp th, .comp td { text-align: left; padding: 15px 20px; border-bottom: 1px solid var(--border); vertical-align: top; }
-.comp th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); font-weight: 500; }
+.comp th { font-family: var(--mono); font-size: 12px; color: var(--dim); font-weight: 500; }
 .comp td:first-child { font-weight: 600; white-space: nowrap; }
 .comp td { color: var(--muted); }
 .comp tr.us td { color: var(--text); background: var(--gaze-soft); }
@@ -282,13 +276,13 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
 @media (min-width: 1000px) { .road { grid-template-columns: repeat(5, 1fr); } }
 .phase { padding: 22px 22px 22px 0; display: grid; gap: 8px; align-content: start; min-width: 0; border-top: 1px solid var(--border); position: relative; }
 .phase::before { content: ""; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--void); border: 1px solid var(--gold); }
-.phase.now::before { background: var(--gaze); border-color: var(--gaze); box-shadow: 0 0 12px var(--gaze); }
+.phase.now::before { background: var(--gaze); border-color: var(--gaze); }
 .phase h3 { font-size: 19px; letter-spacing: -0.02em; }
 .phase p { color: var(--muted); font-size: 14.5px; }
-.phase .gate { font-family: var(--mono); font-size: 11px; color: var(--gold); }
+.phase .gate { font-family: var(--mono); font-size: 12px; color: var(--gold); }
 
-.rise { transition: transform .9s var(--ease); }
-.rise.pre { transform: translateY(28px); }
+.rise { transition: transform .3s ease-out; }
+.rise.pre { transform: translateY(12px); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -320,7 +314,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap">
       <div class="hero-copy">
         <span class="coord">Aisle 06 · Bay 03 · Coffee · Chennai</span>
-        <h1>Every look at your shelf <span class="grad">leaves a trace.</span></h1>
+        <h1>Every look at your shelf <span class="grad">leaves a trace</span></h1>
         <p class="lede">AisleLoop maps where shoppers look on a shelf, brand by brand, and sets it against what actually sells. The AI runs inside the store. Video never leaves it.</p>
         <div class="hero-ctas">
           <a class="btn" href="#pilot">Book a free shelf audit <span class="arrow">→</span></a>
@@ -346,14 +340,14 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
   </section>
 
   <div class="ticker" aria-label="Example shelf readings">
-    <div class="ticker-track" id="ticker"></div>
+    <div class="ticker-track wrap" id="ticker"></div>
   </div>
 
   <section class="sec" id="problem">
     <div class="wrap">
       <div class="sec-head rise">
         <span class="coord">The gap</span>
-        <h2>Online stores see every glance. Aisles see nothing.</h2>
+        <h2>Online stores see every glance. Aisles see nothing</h2>
         <p class="lede">An e-commerce team knows which products were viewed and which sold. A supermarket sees only the bill. What happened at the shelf before it stays invisible.</p>
       </div>
       <div class="compare">
@@ -383,7 +377,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap">
       <div class="sec-head rise">
         <span class="coord">How it works</span>
-        <h2>From a glance to a better shelf.</h2>
+        <h2>From a glance to a better shelf</h2>
       </div>
       <div class="steps">
         <article class="glass step rise">
@@ -414,7 +408,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap">
       <div class="sec-head rise">
         <span class="coord">Brand lab</span>
-        <h2>Attention against sales, brand by brand.</h2>
+        <h2>Attention against sales, brand by brand</h2>
         <p class="lede">Pick a brand to see what a week of shelf data says about it.</p>
       </div>
       <div class="lab">
@@ -425,7 +419,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
         </div>
         <aside class="glass insight rise" aria-live="polite">
           <span class="coord" id="ins-tag">Kaapi Gold</span>
-          <h3 id="ins-head">Loved at the shelf, lost at the till.</h3>
+          <h3 id="ins-head">Loved at the shelf, lost at the till</h3>
           <p id="ins-body"></p>
           <p class="act" id="ins-act"></p>
           <p class="note">Example data for a coffee shelf over one week. Brands and numbers are illustrative.</p>
@@ -438,7 +432,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap aud">
       <article class="glass aud-card rise">
         <span class="coord">For supermarkets</span>
-        <h3>Know which shelves earn their space.</h3>
+        <h3>Know which shelves earn their space</h3>
         <p>Stop guessing which promotions, facings and end-caps work. Get a short weekly list of shelf changes, each tested against a shelf you left alone.</p>
         <ul>
           <li>Sold per 100 looks for every monitored brand</li>
@@ -448,7 +442,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
       </article>
       <article class="glass aud-card brands rise">
         <span class="coord">For FMCG brands</span>
-        <h3>See if your display gets noticed.</h3>
+        <h3>See if your display gets noticed</h3>
         <p>You already pay for end-caps and shelf placement. AisleLoop shows how many shoppers looked at your brand, and how that compares with the rest of the shelf.</p>
         <ul>
           <li>Share of attention against share of shelf</li>
@@ -463,29 +457,29 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap">
       <div class="sec-head rise">
         <span class="coord">Why AisleLoop</span>
-        <h2>Attention tools exist. Attention that pays for itself doesn’t.</h2>
+        <h2>Attention tools exist. Few tie attention to what sold</h2>
         <p class="lede">Shelf eye-tracking is sold today as a research tool, and CCTV analytics counts footfall. AisleLoop joins shelf attention to brand-level sales and lets brands fund the hardware. We have not found another product that combines the two.</p>
       </div>
       <div class="why">
         <article class="glass why-card rise">
-          <span class="tag">Innovation 1</span>
+          <span class="tag">Measurement</span>
           <h3>Brand-area attention, not product guesses</h3>
           <p>Head direction is projected onto a calibrated photo of the shelf and counted per brand area. That is reliable at brand level without eye-tracking hardware on every shelf.</p>
         </article>
         <article class="glass why-card rise">
-          <span class="tag">Innovation 2</span>
+          <span class="tag">Sales join</span>
           <h3>Attention joined to billing</h3>
-          <p>Looks per brand meet units sold for the same hours. The result is sold per 100 looks, a funnel metric physical retail has never had.</p>
+          <p>Looks per brand meet units sold for the same hours. The result is sold per 100 looks, the shelf version of an online conversion rate.</p>
         </article>
         <article class="glass why-card rise">
-          <span class="tag">Innovation 3</span>
+          <span class="tag">Testing</span>
           <h3>Every change is a test</h3>
           <p>Recommendations run against an untouched comparison shelf, so stores and brands see measured effects instead of claims.</p>
         </article>
         <article class="glass why-card rise">
           <span class="tag">Business model</span>
           <h3>Brands fund the shelves</h3>
-          <p>FMCG brands already pay for display space. Paying for proof that the display gets noticed turns the hardware cost into brand revenue, so stores can start for free.</p>
+          <p>FMCG brands already pay for display space. Paying for proof that the display gets noticed is meant to cover the hardware cost with brand revenue, so stores could start for free.</p>
         </article>
         <article class="glass why-card rise">
           <span class="tag">Privacy</span>
@@ -493,7 +487,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
           <p>All vision runs on a box inside the store and only counts leave it. That eases store and shopper concerns, and keeps cloud video costs at zero.</p>
         </article>
         <article class="glass why-card rise">
-          <span class="tag">Data moat</span>
+          <span class="tag">Benchmark</span>
           <h3>A shared shelf benchmark</h3>
           <p>With store opt-in, anonymised results build a benchmark of what attention and conversion look like for each category and shelf position. It grows with every store.</p>
         </article>
@@ -505,7 +499,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap">
       <div class="sec-head rise">
         <span class="coord">Market</span>
-        <h2>A large shelf, and brands moving money to measurable media.</h2>
+        <h2>A large shelf, and brands moving money to measurable media</h2>
         <p class="lede">Third-party estimates. Scopes differ between sources, so treat each figure as a direction, not a precise size.</p>
       </div>
       <div class="market">
@@ -535,7 +529,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap">
       <div class="sec-head rise">
         <span class="coord">Business model</span>
-        <h2>Two customers for every shelf.</h2>
+        <h2>Two customers for every shelf</h2>
         <p class="lede">The store pays for the insight, and brands pay to prove their display works. Pricing is still being tested, so the figures below are assumptions you can change.</p>
       </div>
       <div class="model">
@@ -587,7 +581,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap">
       <div class="sec-head rise">
         <span class="coord">Competition</span>
-        <h2>Who else measures the store, and where we differ.</h2>
+        <h2>Who else measures the store, and where we differ</h2>
       </div>
       <div class="glass comp-wrap rise">
         <table class="comp">
@@ -608,7 +602,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap">
       <div class="sec-head rise">
         <span class="coord">Roadmap</span>
-        <h2>Each stage has a test it must pass.</h2>
+        <h2>Each stage has a test it must pass</h2>
       </div>
       <div class="road rise">
         <div class="phase now"><span class="coord">Stage 0</span><h3>Bench test</h3><p>One camera, a mock shelf, labelled clips. Prove head direction separates neighbouring brands.</p><span class="gate">Gate: brands ranked correctly</span></div>
@@ -624,7 +618,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     <div class="wrap privacy">
       <div class="sec-head rise" style="margin-bottom:0">
         <span class="coord">Privacy by design</span>
-        <h2>The video never leaves the store.</h2>
+        <h2>The video never leaves the store</h2>
         <p class="lede">AisleLoop counts attention. It does not identify shoppers and keeps no record of any individual.</p>
       </div>
       <div class="glass promises rise">
@@ -653,7 +647,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
       <div class="glass pilot rise">
         <div class="pilot-copy">
           <span class="coord">Design partner programme</span>
-          <h2>Start with a free shelf attention audit.</h2>
+          <h2>Start with a free shelf attention audit</h2>
           <p class="lede">We put cameras on a few of your shelves, run them for a few weeks, and hand you a report on which brands get looked at and which sell. You keep the findings either way.</p>
           <div class="specs">
             <div><span>Shelves</span><b>2–4</b></div>
@@ -700,15 +694,15 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
 
   /* Example weekly data for one coffee shelf: looks counted at each brand block, units sold from billing */
   const brands = [
-    { name: "Kaapi Gold",     looks: 403, units: 30, shelf: 18, head: "Loved at the shelf, lost at the till.",
+    { name: "Kaapi Gold",     looks: 403, units: 30, shelf: 18, head: "Loved at the shelf, lost at the till",
       act: "Try a ₹10 trial pack on the eye-level shelf for two weeks, against last month’s baseline." },
-    { name: "Nila Filter",    looks: 286, units: 72, shelf: 24, head: "Small attention, big conversion.",
+    { name: "Nila Filter",    looks: 286, units: 72, shelf: 24, head: "Small attention, big conversion",
       act: "Try two more facings. Shoppers who notice it tend to buy it." },
-    { name: "Arabica Hill",   looks: 234, units: 22, shelf: 14, head: "Premium price, premium hesitation.",
+    { name: "Arabica Hill",   looks: 234, units: 22, shelf: 14, head: "Premium price, premium hesitation",
       act: "Try a shelf talker comparing cost per cup with the brand beside it." },
-    { name: "Morning Mill",   looks: 182, units: 67, shelf: 26, head: "Bought by habit, rarely browsed.",
+    { name: "Morning Mill",   looks: 182, units: 67, shelf: 26, head: "Bought by habit, rarely browsed",
       act: "Try moving it one shelf lower to free eye level. Habit buyers will still find it." },
-    { name: "Southern Roast", looks: 195, units: 57, shelf: 18, head: "Steady and efficient.",
+    { name: "Southern Roast", looks: 195, units: 57, shelf: 18, head: "Steady and efficient",
       act: "Keep the current placement and use it as the control shelf for tests." }
   ];
   const totLooks = brands.reduce((s, b) => s + b.looks, 0), totUnits = brands.reduce((s, b) => s + b.units, 0);
@@ -743,9 +737,9 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
   }
   select(0);
 
-  const items = brands.map(b => '<span class="tk"><b>' + b.name.toUpperCase() + '</b> LOOKS ' + b.looks + ' · SOLD ' + b.units + ' · <em>' + b.per100.toFixed(1) + ' / 100</em></span>');
-  items.push('<span class="tk"><b>EXAMPLE DATA</b> AISLE 06 · BAY 03 · WEEK 46</span>');
-  $("ticker").innerHTML = items.join("") + items.join("");
+  const items = brands.map(b => '<span class="tk"><b>' + b.name + '</b> looks ' + b.looks + ' · sold ' + b.units + ' · <em>' + b.per100.toFixed(1) + ' per 100</em></span>');
+  items.push('<span class="tk"><b>Example data</b> Aisle 06 · Bay 03 · Week 46</span>');
+  $("ticker").innerHTML = items.join("");
 
   /* Hero: attention constellation. Shoppers below; each look casts a ray onto the shelf plane and leaves a star in the brand block it lands on. */
   const cv = $("sky"), ctx = cv.getContext("2d");
@@ -813,9 +807,9 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     time += dt;
     ctx.fillStyle = "#05060A"; ctx.fillRect(0, 0, W, H);
     // background sky
-    bg.forEach(s => { const a = 0.15 + 0.2 * Math.sin(s.p + time * 0.02); ctx.fillStyle = "rgba(" + C.text + "," + a + ")"; ctx.fillRect(s.x, s.y, s.r, s.r); });
+    bg.forEach(s => { const a = 0.15 + 0.2 * Math.sin(s.p); ctx.fillStyle = "rgba(" + C.text + "," + a + ")"; ctx.fillRect(s.x, s.y, s.r, s.r); });
     // shelf: thin gold outline per block, brand label, glow by attention
-    const fs = Math.max(8.5, Math.min(10.5, W / 110));
+    const fs = 12;
     ctx.font = "500 " + fs + "px 'JetBrains Mono', monospace";
     const maxN = Math.max(1, ...blocks.map(b => b.n));
     blocks.forEach(b => {
@@ -827,7 +821,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
       }
       ctx.strokeStyle = "rgba(" + C.gold + ",0.28)"; ctx.lineWidth = 1;
       ctx.strokeRect(b.x + 0.5, b.y + 0.5, b.w - 3, b.h);
-      const label = brands[b.bi].name.toUpperCase();
+      const label = brands[b.bi].name;
       if (ctx.measureText(label).width < b.w - 12) {
         ctx.fillStyle = "rgba(" + C.gold + ",0.85)"; ctx.fillText(label, b.x + 7, b.y + fs + 6);
         ctx.fillStyle = "rgba(" + C.text + ",0.55)"; ctx.fillText(String(b.n), b.x + 7, b.y + b.h - 7);
@@ -842,8 +836,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
     // stars
     stars.forEach(s => {
       s.life = Math.max(0.35, s.life - 0.0006 * dt);
-      const tw = 0.75 + 0.25 * Math.sin(s.p + time * 0.05);
-      ctx.fillStyle = "rgba(" + C.gaze + "," + (s.life * tw) + ")";
+      ctx.fillStyle = "rgba(" + C.gaze + "," + s.life + ")";
       ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
       if (s.life > 0.8) { ctx.fillStyle = "rgba(" + C.gaze + "," + (0.15 * s.life) + ")"; ctx.beginPath(); ctx.arc(s.x, s.y, s.r * 4, 0, 6.283); ctx.fill(); }
     });
@@ -877,7 +870,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
         g.addColorStop(0, "rgba(" + C.gaze + ",0.55)"); g.addColorStop(1, "rgba(" + C.gaze + ",0.05)");
         ctx.strokeStyle = g; ctx.lineWidth = 1;
         ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(p.tx, p.ty); ctx.stroke();
-        ctx.fillStyle = "rgba(" + C.gaze + ",0.9)"; ctx.beginPath(); ctx.arc(p.tx, p.ty, 2.2 + Math.sin(time * 0.15), 0, 6.283); ctx.fill();
+        ctx.fillStyle = "rgba(" + C.gaze + ",0.9)"; ctx.beginPath(); ctx.arc(p.tx, p.ty, 2.2, 0, 6.283); ctx.fill();
       }
       ctx.fillStyle = "rgba(" + C.text + ",0.16)";
       ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(p.x - 10, p.y - 10, 20, 26, 9); else ctx.rect(p.x - 10, p.y - 10, 20, 26); ctx.fill();
@@ -918,7 +911,7 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
   /* Below-the-fold panels rise into place; they are visible at all times */
   if (!reduce && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove("pre"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px" });
-    document.querySelectorAll(".rise").forEach(n => { if (n.getBoundingClientRect().top > window.innerHeight) { n.classList.add("pre"); io.observe(n); } });
+    document.querySelectorAll(".sec-head.rise").forEach(n => { if (n.getBoundingClientRect().top > window.innerHeight) { n.classList.add("pre"); io.observe(n); } });
   }
 
   /* Unit economics calculator (assumptions only) */
