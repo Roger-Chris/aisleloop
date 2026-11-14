@@ -669,8 +669,10 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
             </div>
           </div>
           <div class="field"><label for="f-phone">Phone or WhatsApp</label><input id="f-phone" inputmode="tel" autocomplete="tel"></div>
+          <input id="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <button class="btn" type="submit">Request my audit <span class="arrow">→</span></button>
-          <div class="done" id="form-done" hidden></div>
+          <p class="note">Your details are emailed to the AisleLoop team through FormSubmit and used only to arrange your audit.</p>
+          <div class="done" id="form-done" hidden aria-live="polite"></div>
         </form>
       </div>
     </div>
@@ -932,13 +934,41 @@ footer { border-top: 1px solid var(--border); padding-block: 56px 40px; overflow
   ["c-shelves", "c-store", "c-brand", "c-funded", "c-hw", "c-box", "c-stores"].forEach(id => $(id).addEventListener("input", calc));
   calc();
 
-  /* Audit form: no backend yet, so confirm in-page without claiming it was sent */
-  $("audit-form").addEventListener("submit", e => {
+  /* Audit form: emailed to the AisleLoop team through FormSubmit */
+  const FORM_ENDPOINT = "https://formsubmit.co/ajax/rogerchris190306@gmail.com";
+  const CONTACT_EMAIL = "rogerchris190306@gmail.com";
+  let sending = false;
+  $("audit-form").addEventListener("submit", async e => {
     e.preventDefault();
-    const name = $("f-name").value.trim(), store = $("f-store").value.trim(), done = $("form-done");
+    if (sending) return;
+    const v = id => $(id).value.trim();
+    const name = v("f-name"), store = v("f-store"), done = $("form-done"), btn = e.target.querySelector("button[type=submit]");
     done.hidden = false;
     if (!name || !store) { done.textContent = "Add your name and your store or brand name to continue."; (name ? $("f-store") : $("f-name")).focus(); return; }
-    done.textContent = "Thanks, " + name + ". Your audit request for " + store + " is ready. This preview page doesn’t send requests yet, so please share these details with the AisleLoop team directly.";
+    if ($("f-hp").value) return; // spam trap
+    sending = true; btn.disabled = true; done.textContent = "Sending your request…";
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: "New AisleLoop audit request: " + store,
+          _template: "table",
+          _captcha: "false",
+          Name: name, Role: v("f-role"), "Store or brand": store, City: v("f-city"),
+          "Number of stores": $("f-count").value, "Phone / WhatsApp": v("f-phone"),
+          "Sent from": location.href
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || String(data.success) === "false") throw new Error(data.message || ("HTTP " + res.status));
+      done.textContent = "Thanks, " + name + ". Your audit request for " + store + " has been sent. The AisleLoop team will contact you.";
+      e.target.reset(); $("f-city").value = "Chennai";
+    } catch (err) {
+      done.textContent = "Your request couldn’t be sent (" + err.message + "). Please try again, or email " + CONTACT_EMAIL + " with your details.";
+    } finally {
+      sending = false; btn.disabled = false;
+    }
   });
 })();
 </script>
